@@ -1,25 +1,7 @@
 <% include partials/header.ejs%>
-	<%  if (!isAuthenticated){ %>
-		<br>
-		<div class="alert alert-warning">
-		<a href="/login">You must be logged in to view this page</a>
-		</div>
-	<%  } else {%>
 
-	<h1>Create a new blog post.</h1>
-		<form method="POST" action="/posts">
-			
-      <br>
-     	<input type="text" name="post[title]" placeholder="Blog title" autofocus>
-      <br>
-      <h3>Author: <%= user.username%></h3>
-      <br>
-      <textarea  rows="4" cols="65" name="post[body]" placeholder="Post"></textarea>
-      <br>
-      <input type="submit">
-      <br>
-    </form>
-	
+  <h1>Hello, <%= user.username %> - welcome to our website!</h1>
 
-	<%  }%>
+
+
 <% include partials/footer.ejs%>
