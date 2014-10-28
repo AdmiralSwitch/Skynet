@@ -3,16 +3,15 @@
 module.exports = function(sequelize, DataTypes) {
   var People = sequelize.define("People", {
     name: DataTypes.STRING,
-    address: DataTypes.STRING,
+    location: DataTypes.STRING,
     age: DataTypes.INTEGER,
-    ssn: DataTypes.INTEGER,
-    comorbidity: DataTypes.INTEGER,
     offspring: DataTypes.INTEGER,
-    income: DataTypes.INTEGER
+    photo: DataTypes.STRING,
+    ssn: DataTypes.INTEGER
   }, {
     classMethods: {
-      associate: function(models) {
-        // associations can be defined here
+      associate: function(db) {
+        People.hasMany(db.Condition);
       }
     }
   });

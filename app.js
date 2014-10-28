@@ -11,25 +11,15 @@ var express = require("express"),
   //artisional middleware to route auth
   var routeMiddleware = require("./config/routes");
 
-//Disease.db Seed data
-// db.Condition.create({name: "Asthma", cost:5});
-// db.Condition.create({name: "Cancer", cost:70});
-// db.Condition.create({name: "Emphysema", cost:70});
-// db.Condition.create({name: "Heart Disease", cost:85});
-// db.Condition.create({name: "Chronic Obstuctive Pulmonary Sidease", cost:100});
-// db.Condition.create({name: "Coronary Artery Disease", cost:100});
-// db.Condition.create({name: "Diabetes", cost:65});
-// db.Condition.create({name: "Hypertension", cost:60});
-// db.Condition.create({name: "Kidney Disease", cost:80});
-// db.Condition.create({name: "Liver Disease", cost:83});
-// db.Condition.create({name: "Extreme Obesity", cost:10});
-// db.Condition.create({name: "Stroke", cost:70});
+
 
 
 // Middleware for ejs, grabbing HTML and including static files
 app.set('view engine', 'ejs');
 app.use(morgan('dev'));
-app.use(bodyParser.urlencoded({extended: false}) );
+app.use(bodyParser.urlencoded({extended:true}) );
+app.use(express.static(__dirname + "/public"));
+
 
 app.use(session( {
   secret: 'thisismysecretkey',
@@ -102,11 +92,28 @@ app.get('/logout', function(req,res){
   res.redirect('/');
 });
 
+
+
+app.get("/nice", function(req, res){
+  res.render("list", {mood: "nice"});
+});
+
+app.get("/meh", function(req, res){
+
+  res.render("list", {mood: "meh..."});
+});
+
+app.get("/evil", function(req, res){
+
+  res.render("list", {mood: "EVIL"});
+});
+
 // catch-all for 404 errors
 app.get('*', function(req,res){
   res.status(404);
   res.render('404');
 });
+
 
 
 app.listen(3000, function(){

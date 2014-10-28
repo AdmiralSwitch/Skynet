@@ -3,11 +3,12 @@
 module.exports = function(sequelize, DataTypes) {
   var Condition = sequelize.define("Condition", {
     name: DataTypes.STRING,
-    cost: DataTypes.INTEGER
+    cost: DataTypes.INTEGER,
+    PeopleId: DataTypes.INTEGER
   }, {
     classMethods: {
-      associate: function(models) {
-        // associations can be defined here
+      associate: function(db) {
+        Condition.belongsTo(db.People);
       }
     }
   });
