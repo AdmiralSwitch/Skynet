@@ -1,9 +1,16 @@
 <% include partials/header.ejs %>
 
-<h1>You will need to sacrifice 10 members of society today</h1> 
+<h1>You will need to eliminate 
+10 people today.</h1><h2>Choose wisely.</h2> 
 <ul class="humons"></ul>
-<input type="button" class = "btn btn-primary btn-lg" onclick="getData();" value="Begin">
+<input type="button" class = "btn btn-primary btn-lg" onclick="getData(), remove()" value="Start">
+
+
+
+
 <script>
+
+
 var counter = 0;
 
 function getData()
@@ -23,7 +30,7 @@ function getData()
             var name = first + " " + last;
             var address = data.results[0].user.location.street + " " + title(data.results[0].user.location.city) + " " + title(data.results[0].user.location.state);
             var ssn = data.results[0].user.SSN;
-            var age = Math.floor((Math.random()*101)+1);
+            var age = Math.floor((Math.random()*70)+18);
             var gender = data.results[0].user.gender;
             var photo = data.results[0].user.picture.medium;
             var comorbidities = [];
@@ -35,51 +42,51 @@ function getData()
             //Are you infected?
             if (chance() <= 8 && age >= 4){
               console.log("Bad News: You've got Asthma");
-              comorbidities.push(1);
+              comorbidities.push("Asthma");
             }
             if (chance() <= 8 && age >= 40){
               console.log("Bad News: You've got Cancer");
-              comorbidities.push(2);
+              comorbidities.push("Cancer");
             }
             if (chance() <= 12 && age >= 25){
               console.log("Bad News: You've got Heart Disease");
-              comorbidities.push(3);
+              comorbidities.push("Heart Disease");
             }
             if (chance() <= 3 && age >= 25){
               console.log("Bad News: You've got COPD");
-              comorbidities.push(4);
+              comorbidities.push("COPD");
             }
             if (chance() <= 2 && age >= 20){
               console.log("Bad News: You've got Emphysema");
-              comorbidities.push(5);
+              comorbidities.push("Emphysema");
             }
             if (chance() <= 6 && age >= 30){
               console.log("Bad News: You've got CAD");
-              comorbidities.push(6);
+              comorbidities.push("CAD");
             }
             if (chance() <= 9){
               console.log("Bad News: You've got Diabetes");
-              comorbidities.push(7);
+              comorbidities.push("Diabetes");
             }
             if (chance() <= 24 && age >= 20){
               console.log("Bad News: You've got Hypertension");
-              comorbidities.push(8);
+              comorbidities.push("Hypertension");
             }
             if (chance() <= 2 && age >= 60){
               console.log("Bad News: You've got Kidney Disease");
-              comorbidities.push(9);
+              comorbidities.push("Kidney Disease");
             }
             if (chance() <= 1 && age >= 50){
               console.log("Bad News: You've got Liver Disease");
-              comorbidities.push(10);
+              comorbidities.push("LiverDisease");
             }
             if (chance() <= 5){
               console.log("Bad News: You've got Extreme Obesity");
-              comorbidities.push(11);
+              comorbidities.push("Extreme Obesity");
             }
             if (chance() <= 3 && age >= 60){
               console.log("Bad News: You've got Stroke");
-              comorbidities.push(12);
+              comorbidities.push("Stroke");
             }
 
 
@@ -101,29 +108,48 @@ function getData()
             // offspring(chance());
 
             //push to db
-            // db.People.create(
-            //   {
-            //     name: name,
-            //     address: address,
-            //     age: age,
-            //     ssn: ssn,
-            //     offspring: offspring,
-            //     photo: photo
-            //   });
+
           // INSERT INTO People (name,address,age,ssn,comorbidity,offspring,income) VALUES (name, address, age, ssn, comorbidities, offspring, income);
 
 
 
             //TEST List data
             $('.humons').append(
-            	
-            	'<p>' + '<img id="pic" src= '+photo+' />' + '</p>' + 
+            	'<div class="vic">' +
+            	'<p>' + 
+              '<img id="pic" src= '+ photo +' />' + 
+
+              //EXTERMINATE FORM/BUTTON
+              '<form method ="POST" action="/post/people">' +
+              '<input type="hidden" name="name" value='+name+'>' +
+              '<input type="hidden" name="location" value='+address+'>' +
+              '<input type="hidden" name="age" value='+age+'>' +
+              '<input type="hidden" name="offspring" value='+offspring+'>' +
+              '<input type="hidden" name="photo" value='+photo+'>' +
+              '<input type="hidden" name="ssn" value='+ssn+'>' +
+              '<input type="submit" class = "btn btn-success btn-lg" value="EXTERMINATE">' +
+              '</form>' +
+              //Retain Button
+              '<input type="button" id="btnRetain" class="btn btn-primary btn-lg" onclick="" value="Retain">' +
+
+              '</p>' + 
             	'<p>' + "Age: " + age + '</p>' +
             	'<p>' + 'Name: ' + name + '</p>' + 
             	'<p>' + address + '</p>' +
             	'<p>' + "SSN: " + ssn + '</p>' +
             	'<p>' + "Children: " + offspring + '</p>' +
-            	'<p>' + "Conditions: " + comorbidities + '</p>');
+            	'<p>' + "Diagnoses: " + comorbidities + '</p>' +
+
+
+            
+            
+
+
+            
+
+            '</div>');
+
+
             //console.log(data);
             counter++;
 
@@ -132,16 +158,20 @@ function getData()
         }
     });
 }
+
+// var blacklist = function(name, location, age, offspring, photo, ssn){
+//   db.People.create(
+//   {
+//   name: name,
+//   location: address,
+//   age: age,
+//   offspring: offspring,
+//   photo: photo,
+//   ssn: ssn
+//   }
+// });
+
+
 </script>
 
 <% include partials/footer.ejs%>
-
-
-	<!-- <div class="btn-group btn-group-justified">
-		  <div class="btn-group">
-			   <a href="/nice" class = "btn btn-success btn-lg" name="nice">yes</a>
-			</div>
-			<div class="btn-group">
-			  <a href="/evil" class = "btn btn-danger btn-lg">I can't.</a>
-		  </div>
-	  </div> -->

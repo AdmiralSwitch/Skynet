@@ -93,17 +93,18 @@ app.get('/logout', function(req,res){
 });
 
 
+//   // db.Person.create(name, location, age, offspring, photo, ssn).done(function(err, post))
+//   res.render("Things are being posted, maybe.");
+// });
 
+//gets you started on the list page
 app.get("/work", function(req, res){
   
   res.render("list", {mood: "nice"});
 });
 
-app.get("/meh", function(req, res){
 
-  res.render("meh", {mood: "meh..."});
-});
-
+//cleaning crews en route
 app.get("/cant", function(req, res){
 
   res.render("evil", {mood: "EVIL"});
@@ -120,6 +121,23 @@ app.get("/cant", function(req, res){
 //   });
 // });
 //
+
+//===================================
+//        POST candidates to db
+//===================================
+
+
+app.post('/post/people', function(req,res){
+  db.People.create({
+    name: req.body.name,
+    location: req.body.location,
+    age: req.body.age,
+    offspring: req.body.offspring,
+    photo: req.body.photo,
+    ssn: req.body.ssn
+  });
+});
+
 
 // catch-all for 404 errors
 app.get('*', function(req,res){

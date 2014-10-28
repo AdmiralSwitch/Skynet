@@ -24,7 +24,7 @@ module.exports = {
         type: DataTypes.STRING
       },
       ssn: {
-        type: DataTypes.INTEGER
+        type: DataTypes.STRING
       },
       createdAt: {
         allowNull: false,

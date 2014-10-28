@@ -8,8 +8,9 @@ footer {
 img {
   height: 150px;
   width: 150px;
-  margin: 40px 0px 0px 0px;
+  margin: 0px 0px 0px 0px;
   border: 7px solid white;
   border-color: rgba(206,205,217,.25);
   border-radius: 90px;
 }
+
