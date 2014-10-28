@@ -95,18 +95,31 @@ app.get('/logout', function(req,res){
 
 
 app.get("/nice", function(req, res){
-  res.render("list", {mood: "nice"});
+  
+  res.render("nice", {mood: "nice"});
 });
 
 app.get("/meh", function(req, res){
 
-  res.render("list", {mood: "meh..."});
+  res.render("meh", {mood: "meh..."});
 });
 
 app.get("/evil", function(req, res){
 
-  res.render("list", {mood: "EVIL"});
+  res.render("evil", {mood: "EVIL"});
 });
+
+
+//===================================
+//         display candidates
+//===================================
+// db.people.findAll();
+// app.get("/posts", function (req, res) {
+//   db.Post.findAll({include: [db.Author]}).done(function (err, allPosts) {
+//     res.render("posts/index.ejs", {posts: allPosts});
+//   });
+// });
+//
 
 // catch-all for 404 errors
 app.get('*', function(req,res){

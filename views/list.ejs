@@ -2,11 +2,11 @@
 
 <h1>You chose: <%= mood%></h1> 
 <% if(mood === "EVIL"){ %>
-<%= "all of these people will need to be eliminated today."%>
+<%= "Choose 10 people to be eliminated today."%>
 <% } else if(mood === "meh...") {%>
-<%= "You will only have to eliminate 3 of these people."%>
+<%= "Choose 3 people to eliminate today."%>
 <% } else if(mood === "nice") {%>
-<%= "You will only have to eliminate 1 of these people."%>
+<%= "Chose one of these people to be eliminated today."%>
 <% } %>
 
 <% include partials/footer.ejs%>
