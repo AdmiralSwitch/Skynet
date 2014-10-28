@@ -1,16 +1,15 @@
 <% include partials/header.ejs%>
 
-  <h1>Hello, <%= user.username %> - How are you feeling today?</h1>
+  <h1>Hello, <%= user.username %> </h1> 
+  The weather outside is:
+  Are you ready to get to work?
 	
 	  <div class="btn-group btn-group-justified">
 		  <div class="btn-group">
-			   <a href="/nice" class = "btn btn-success btn-lg" name="nice">nice</a>
+			   <a href="/work" class = "btn btn-primary btn-lg" name="nice">yes</a>
 			</div>
 			<div class="btn-group">
-			  <a href="/meh" class = "btn btn-warning btn-lg">meh...</a>
-			</div>
-			<div class="btn-group">
-			  <a href="/evil" class = "btn btn-danger btn-lg">evil</a>
+			  <a href="/cant" class = "btn btn-warning btn-lg">I can't.</a>
 		  </div>
 	  </div>
   <br>

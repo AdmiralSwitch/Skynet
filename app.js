@@ -94,9 +94,9 @@ app.get('/logout', function(req,res){
 
 
 
-app.get("/nice", function(req, res){
+app.get("/work", function(req, res){
   
-  res.render("nice", {mood: "nice"});
+  res.render("list", {mood: "nice"});
 });
 
 app.get("/meh", function(req, res){
@@ -104,7 +104,7 @@ app.get("/meh", function(req, res){
   res.render("meh", {mood: "meh..."});
 });
 
-app.get("/evil", function(req, res){
+app.get("/cant", function(req, res){
 
   res.render("evil", {mood: "EVIL"});
 });

@@ -1,9 +1,3 @@
-<% include partials/header.ejs %>
-
-<h1>You will need to sacrifice 10 members of society today</h1> 
-<ul class="humons"></ul>
-<input type="button" class = "btn btn-primary btn-lg" onclick="getData();" value="Begin">
-<script>
 var counter = 0;
 
 function getData()
@@ -118,9 +112,9 @@ function getData()
             $('.humons').append(
             	
             	'<p>' + '<img id="pic" src= '+photo+' />' + '</p>' + 
-            	'<p>' + "Age: " + age + '</p>' +
             	'<p>' + 'Name: ' + name + '</p>' + 
-            	'<p>' + address + '</p>' +
+            	'<p>' + "Address: " + address + '</p>' +
+            	'<p>' + "Age: " + age + '</p>' +
             	'<p>' + "SSN: " + ssn + '</p>' +
             	'<p>' + "Children: " + offspring + '</p>' +
             	'<p>' + "Conditions: " + comorbidities + '</p>');
@@ -132,16 +126,3 @@ function getData()
         }
     });
 }
-</script>
-
-<% include partials/footer.ejs%>
-
-
-	<!-- <div class="btn-group btn-group-justified">
-		  <div class="btn-group">
-			   <a href="/nice" class = "btn btn-success btn-lg" name="nice">yes</a>
-			</div>
-			<div class="btn-group">
-			  <a href="/evil" class = "btn btn-danger btn-lg">I can't.</a>
-		  </div>
-	  </div> -->

@@ -1,7 +1,142 @@
 <% include partials/header.ejs %>
 
 
-    <h1>You chose: EVIL</h1>
-    Chose 10 of these people to be eliminated today.
+<h1>I'm sorry to hear that.</h1>
+A cleaning crew will be with you shortly.
+<ul class="humons"></ul>
+<input type="button" onclick="getData();" value="Populate DB">
+
+
+<script>
+var counter = 0;
+
+function getData()
+{
+    $.ajax({
+        url:'http://api.randomuser.me/',
+        async: true,
+        dataType: 'json',
+        success:function(data){
+            //function to capitalize the first letter of a string
+            var title = function(string){
+                return string.charAt(0).toUpperCase() + string.slice(1);
+            };
+            //pulling seed data from api
+            var first = title(data.results[0].user.name.first);
+            var last = title(data.results[0].user.name.last);
+            var name = first + " " + last;
+            var address = data.results[0].user.location.street + " " + title(data.results[0].user.location.city) + " " + title(data.results[0].user.location.state);
+            var ssn = data.results[0].user.SSN;
+            var age = Math.floor((Math.random()*101)+1);
+            var gender = data.results[0].user.gender;
+            var photo = data.results[0].user.picture.medium;
+            var comorbidities = [];
+
+            
+            var chance = function(){
+              return Math.floor((Math.random()*100)+1);
+            };
+            //Are you infected?
+            if (chance() <= 8 && age >= 4){
+              console.log("Bad News: You've got Asthma");
+              comorbidities.push(1);
+            }
+            if (chance() <= 8 && age >= 40){
+              console.log("Bad News: You've got Cancer");
+              comorbidities.push(2);
+            }
+            if (chance() <= 12 && age >= 25){
+              console.log("Bad News: You've got Heart Disease");
+              comorbidities.push(3);
+            }
+            if (chance() <= 3 && age >= 25){
+              console.log("Bad News: You've got COPD");
+              comorbidities.push(4);
+            }
+            if (chance() <= 2 && age >= 20){
+              console.log("Bad News: You've got Emphysema");
+              comorbidities.push(5);
+            }
+            if (chance() <= 6 && age >= 30){
+              console.log("Bad News: You've got CAD");
+              comorbidities.push(6);
+            }
+            if (chance() <= 9){
+              console.log("Bad News: You've got Diabetes");
+              comorbidities.push(7);
+            }
+            if (chance() <= 24 && age >= 20){
+              console.log("Bad News: You've got Hypertension");
+              comorbidities.push(8);
+            }
+            if (chance() <= 2 && age >= 60){
+              console.log("Bad News: You've got Kidney Disease");
+              comorbidities.push(9);
+            }
+            if (chance() <= 1 && age >= 50){
+              console.log("Bad News: You've got Liver Disease");
+              comorbidities.push(10);
+            }
+            if (chance() <= 5){
+              console.log("Bad News: You've got Extreme Obesity");
+              comorbidities.push(11);
+            }
+            if (chance() <= 3 && age >= 60){
+              console.log("Bad News: You've got Stroke");
+              comorbidities.push(12);
+            }
+
+
+            var kids = function(random){
+              if(random < 10){
+                return 4;
+              } else if (random > 10 && random < 25){
+                return 3;
+              } else if (random > 25 && random < 50){
+                return 2;
+              } else if (random > 50 && random < 80){
+                return 1;
+              } else {
+                return 0;
+              }
+            };
+
+            var offspring = kids(chance());
+            // offspring(chance());
+
+            //push to db
+            // db.People.create(
+            //   {
+            //     name: name,
+            //     address: address,
+            //     age: age,
+            //     ssn: ssn,
+            //     offspring: offspring,
+            //     photo: photo
+            //   });
+          // INSERT INTO People (name,address,age,ssn,comorbidity,offspring,income) VALUES (name, address, age, ssn, comorbidities, offspring, income);
+
+
+
+            //TEST List data
+            $('.humons').append(
+            	
+            	'<p>' + '<img id="pic" src= '+photo+' />' + '</p>' + 
+            	'<p>' + 'Name: ' + name + '</p>' + 
+            	'<p>' + "Address: " + address + '</p>' +
+            	'<p>' + "Age: " + age + '</p>' +
+            	'<p>' + "SSN: " + ssn + '</p>' +
+            	'<p>' + "Children: " + offspring + '</p>' +
+            	'<p>' + "Conditions: " + comorbidities + '</p>');
+            //console.log(data);
+            counter++;
+
+            //The amount of users to generate
+            if (counter < 1) getData();
+        }
+    });
+}
+</script>
+
 
 <% include partials/footer.ejs%>
