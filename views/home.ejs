@@ -2,7 +2,7 @@
 
   <h1>Hello, <%= user.username %> </h1> 
   <p>
-  The weather outside is: <h5>Partly Cloudy</h5>
+  It's currently: <h5></h5>
   </p>
   Are you ready to get to work?
 	
@@ -16,7 +16,26 @@
 	  </div>
   <br>
 
+<script>
 
+  function b(){
+
+    var url = 'https://api.forecast.io/forecast/<%= process.env.FORECAST_IO_KEY%>/37.8267,-122.423';
+    var data;
+
+    $.getJSON(url + "?callback=?", function(data) {
+              //console.log(data);
+      $('h5').html(data.currently.temperature+"º and "+data.currently.summary);
+    });
+  };
+
+
+   
+  $( document ).ready(function() {
+    b();
+  });
+
+</script>
 
 
 <% include partials/footer.ejs%>

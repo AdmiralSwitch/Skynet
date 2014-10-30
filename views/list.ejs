@@ -1,20 +1,18 @@
 <% include partials/header.ejs %>
 
-<h1>You will need to eliminate 
- people today.</h1><h2>Choose wisely.</h2> 
+<div id="freshmeat">
+<h3>You will need to eliminate <div id="counter"><%= session.assignments  %></div>
+ people today.</h3><h4>Choose wisely.</h4> 
 <ul class="humons"></ul>
-<!-- <input type="button" class = "btn btn-primary btn-lg" onclick="getData(), remove()" value="Start"> -->
-
+</div>
 
 <script>
 
-
 var counter = 0;
-
 function getData(){
   console.log("GET DATA");
-$(".humons").empty();
 
+$(".humons").empty();
     $.ajax({
         url:'http://api.randomuser.me/',
         async: true,
@@ -107,16 +105,14 @@ $(".humons").empty();
             var offspring = kids(chance());
             // offspring(chance());
 
-            //push to db
-
           // INSERT INTO People (name,address,age,ssn,comorbidity,offspring,income) VALUES (name, address, age, ssn, comorbidities, offspring, income);
 
 
 
             //TEST List data
             $('.humons').append(
-            	'<div class="vic">' +
-            	'<p>' + 
+              '<div class="vic">' +
+              '<p>' + 
               '<img id="pic" src= '+ photo +' />' + 
 
               //EXTERMINATE FORM/BUTTON
@@ -126,30 +122,23 @@ $(".humons").empty();
               '<input type="hidden" name="age" value='+age+'>' +
               '<input type="hidden" name="offspring" value='+offspring+'>' +
               '<input type="hidden" name="photo" value='+photo+'>' +
-              '<input type="hidden" name="ssn" value='+ssn+'>' +
-              '<input type="submit" class = "btn btn-success btn-lg" value="EXTERMINATE">' +
+              '<input type="hidden" name="ssn" value='+ssn+'>' + 
+              '<div class="btn-group">' +
+              '<input type="submit" id="EXTERMINATE" class = "btn btn-success btn-lg" value="EXTERMINATE">' +
               '</form>' +
 
               //Retain Button
-              '<input type="button" id="btnRetain" class="btn btn-primary btn-lg" onclick="getData(), remove()" value="Retain">' +
+              '<input type="button" id="btnRetain" class="btn btn-primary btn-lg" onclick="getData(), remove()" value="ABSOLVE">' +
+              '</div>' +
 
               '</p>' + 
-            	'<p>' + "Age: " + age + '</p>' +
-            	'<p>' + 'Name: ' + name + '</p>' + 
-            	'<p>' + address + '</p>' +
-            	'<p>' + "SSN: " + ssn + '</p>' +
-            	'<p>' + "Children: " + offspring + '</p>' +
-            	'<p>' + "Diagnoses: " + comorbidities + '</p>' +
-
-
-            
-            
-
-
-            
-
-            '</div>');
-
+              '<p>' + "Age: " + age + '</p>' +
+              '<p>' + 'Name: ' + name + '</p>' + 
+              '<p>' + address + '</p>' +
+              '<p>' + "SSN: " + ssn + '</p>' +
+              '<p>' + "Children: " + offspring + '</p>' +
+              '<p>' + "Diagnoses: " + comorbidities + '</p>' +
+              '</div>');
 
             //console.log(data);
             counter++;
@@ -158,11 +147,16 @@ $(".humons").empty();
             if (counter < 1) getData();
         }
     });
+
 }
 
 $( document ).ready(function() {
-    getData();
+  getData();
 });
+
+
 </script>
+
+
 
 <% include partials/footer.ejs%>

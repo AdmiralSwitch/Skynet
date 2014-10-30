@@ -1,5 +1,4 @@
 <% include partials/header.ejs%>
-  <a href="/work" class = "btn btn-danger btn-lg">Exterminate more</a>
 
 <h1>Kill List:</h1>
 
@@ -13,9 +12,12 @@
       <p>
         age: <%= post.age %>
       </p>
+      <% if (post.Assassin){ %>
       <p> 
         assassin: <%= post.Assassin.dataValues.title%>
       </p>
+      <%}%>
+
       <h6><%= post.location %></h6>
     </p>
   </div>
@@ -31,19 +33,3 @@
 
 
 <% include partials/footer.ejs%>
-<!-- 
-<div id="accordion">
-  <% posts.forEach(function (post) { %>
-  <h3><%= post.name %></h3>
-  <div>
-  <p>
-    <img id="pic" src= <%= post.photo%> />
-    <p>
-      <%= post.age %>
-    </p>
-    <h3><%= post.location %></h3>
-    
-    </p>
-  </div>
-</div>
-<% }) %> -->

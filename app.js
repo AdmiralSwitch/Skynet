@@ -93,22 +93,20 @@ app.get('/logout', function(req,res){
 });
 
 
-//   // db.Person.create(name, location, age, offspring, photo, ssn).done(function(err, post))
-//   res.render("Things are being posted, maybe.");
-// });
 
 //gets you started on the list page
 app.get("/work", function(req, res){
-  
-  res.render("list", {mood: "nice"});
+  req.session.assignments = 5;
+  res.render("list", {session: req.session});
 });
 
 
 //cleaning crews en route
 app.get("/cant", function(req, res){
 
-  res.render("evil", {mood: "EVIL"});
+  res.render("evil");
 });
+
 
 
 //===================================
@@ -116,8 +114,6 @@ app.get("/cant", function(req, res){
 //===================================
 
 app.get("/thechosen", function (req, res) {
-
-
   db.People.findAll({include:[db.Assassin]}).done(function (err, allPosts) {
     res.render("show", {posts: allPosts});
   });
@@ -133,6 +129,8 @@ var assn = function(){
 };
 
 app.post('/post/people', function(req,res){
+  //count down
+  req.session.assignments -= 1;
   db.People.create({
     name: req.body.name,
     location: req.body.location,
@@ -142,7 +140,11 @@ app.post('/post/people', function(req,res){
     ssn: req.body.ssn,
     AssassinId: assn()
   });
-  res.redirect("/thechosen");
+  if (req.session.assignments <= 0){
+    res.redirect("/thechosen");
+  } else {
+  res.render("list", {session: req.session});
+  }
 });
 
 //vvv working solution
