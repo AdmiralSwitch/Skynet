@@ -1,0 +1,49 @@
+<% include partials/header.ejs%>
+  <a href="/work" class = "btn btn-danger btn-lg">Exterminate more</a>
+
+<h1>Kill List:</h1>
+
+
+<div id="accordion">
+<% posts.forEach(function (post) { %>
+  <h4><%= post.name %></h4>
+  <div>
+    <p>
+      <img id="pic" src= <%= post.photo%> />
+      <p>
+        age: <%= post.age %>
+      </p>
+      <p> 
+        assassin: <%= post.Assassin.dataValues.title%>
+      </p>
+      <h6><%= post.location %></h6>
+    </p>
+  </div>
+<% }) %> 
+</div>
+
+
+<script>
+  $( window ).load( function() {
+    $( "#accordion" ).accordion();
+  });
+</script>
+
+
+<% include partials/footer.ejs%>
+<!-- 
+<div id="accordion">
+  <% posts.forEach(function (post) { %>
+  <h3><%= post.name %></h3>
+  <div>
+  <p>
+    <img id="pic" src= <%= post.photo%> />
+    <p>
+      <%= post.age %>
+    </p>
+    <h3><%= post.location %></h3>
+    
+    </p>
+  </div>
+</div>
+<% }) %> -->

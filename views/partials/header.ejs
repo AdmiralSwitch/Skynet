@@ -3,13 +3,29 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Document</title>
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="../stylesheets/main.css">
+	 <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="../stylesheets/main.css">
 	<!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
   
   <!-- Optional theme -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+
+
+
+
 </head>
 <body>
+<script type="text/javascript"> 
+var totalCount = 3;
+function ChangeIt() {
+  var num = Math.ceil( Math.random() * totalCount );
+  document.body.background = 'bgimages/'+num+'.jpg';
+  document.body.style.backgroundRepeat = "repeat";// Background repeat
+}
+</script>
+  <a href="/logout" class = "btn btn-danger btn-lg">Log out here</a>
+
 	<div class="container text-center">
+

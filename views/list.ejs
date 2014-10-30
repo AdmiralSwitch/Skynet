@@ -1,11 +1,9 @@
 <% include partials/header.ejs %>
 
 <h1>You will need to eliminate 
-10 people today.</h1><h2>Choose wisely.</h2> 
+ people today.</h1><h2>Choose wisely.</h2> 
 <ul class="humons"></ul>
-<input type="button" class = "btn btn-primary btn-lg" onclick="getData(), remove()" value="Start">
-
-
+<!-- <input type="button" class = "btn btn-primary btn-lg" onclick="getData(), remove()" value="Start"> -->
 
 
 <script>
@@ -13,8 +11,10 @@
 
 var counter = 0;
 
-function getData()
-{
+function getData(){
+  console.log("GET DATA");
+$(".humons").empty();
+
     $.ajax({
         url:'http://api.randomuser.me/',
         async: true,
@@ -121,16 +121,17 @@ function getData()
 
               //EXTERMINATE FORM/BUTTON
               '<form method ="POST" action="/post/people">' +
-              '<input type="hidden" name="name" value='+name+'>' +
-              '<input type="hidden" name="location" value='+address+'>' +
+              '<input type="hidden" name="name" value="'+name+'">' +
+              '<input type="hidden" name="location" value="'+address+'">' +
               '<input type="hidden" name="age" value='+age+'>' +
               '<input type="hidden" name="offspring" value='+offspring+'>' +
               '<input type="hidden" name="photo" value='+photo+'>' +
               '<input type="hidden" name="ssn" value='+ssn+'>' +
               '<input type="submit" class = "btn btn-success btn-lg" value="EXTERMINATE">' +
               '</form>' +
+
               //Retain Button
-              '<input type="button" id="btnRetain" class="btn btn-primary btn-lg" onclick="" value="Retain">' +
+              '<input type="button" id="btnRetain" class="btn btn-primary btn-lg" onclick="getData(), remove()" value="Retain">' +
 
               '</p>' + 
             	'<p>' + "Age: " + age + '</p>' +
@@ -159,19 +160,9 @@ function getData()
     });
 }
 
-// var blacklist = function(name, location, age, offspring, photo, ssn){
-//   db.People.create(
-//   {
-//   name: name,
-//   location: address,
-//   age: age,
-//   offspring: offspring,
-//   photo: photo,
-//   ssn: ssn
-//   }
-// });
-
-
+$( document ).ready(function() {
+    getData();
+});
 </script>
 
 <% include partials/footer.ejs%>

@@ -7,11 +7,13 @@ module.exports = function(sequelize, DataTypes) {
     age: DataTypes.INTEGER,
     offspring: DataTypes.INTEGER,
     photo: DataTypes.STRING,
-    ssn: DataTypes.STRING
+    ssn: DataTypes.STRING,
+    AssassinId: DataTypes.INTEGER
   }, {
     classMethods: {
       associate: function(db) {
-        People.hasMany(db.Condition);
+        // People.hasMany(db.Condition);
+        People.belongsTo(db.Assassin);
       }
     }
   });

@@ -114,18 +114,23 @@ app.get("/cant", function(req, res){
 //===================================
 //         display candidates
 //===================================
-// db.people.findAll();
-// app.get("/posts", function (req, res) {
-//   db.Post.findAll({include: [db.Author]}).done(function (err, allPosts) {
-//     res.render("posts/index.ejs", {posts: allPosts});
-//   });
-// });
-//
+
+app.get("/thechosen", function (req, res) {
+
+
+  db.People.findAll({include:[db.Assassin]}).done(function (err, allPosts) {
+    res.render("show", {posts: allPosts});
+  });
+});
+
 
 //===================================
 //        POST candidates to db
 //===================================
-
+var assn = function(){
+  var x = Math.floor((Math.random()*10)+1);
+  return x;
+};
 
 app.post('/post/people', function(req,res){
   db.People.create({
@@ -134,9 +139,38 @@ app.post('/post/people', function(req,res){
     age: req.body.age,
     offspring: req.body.offspring,
     photo: req.body.photo,
-    ssn: req.body.ssn
+    ssn: req.body.ssn,
+    AssassinId: assn()
   });
+  res.redirect("/thechosen");
 });
+
+//vvv working solution
+//   db.People.create({
+//     name: req.body.name,
+//     location: req.body.location,
+//     age: req.body.age,
+//     offspring: req.body.offspring,
+//     photo: req.body.photo,
+//     ssn: req.body.ssn,
+    
+//   })
+//   .done(function(err, person){
+//     db.Assassin.find(assn()).done(function(err, assassin){
+//       assassin.addPerson(person).done(function(err, whatever){
+//         res.redirect("/thechosen");
+//       });
+//     });
+//   });
+// });
+
+//===================================
+//        Clear db
+//===================================
+app.delete('/clear', function(db){
+  db.destroy().success(function() {
+  });
+});  
 
 
 // catch-all for 404 errors
@@ -148,5 +182,5 @@ app.get('*', function(req,res){
 
 
 app.listen(3000, function(){
-  console.log("get this party started on port 3000");
+  console.log("Let's fucking do this, port 3000");
 });

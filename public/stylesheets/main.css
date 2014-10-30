@@ -14,3 +14,13 @@ img {
   border-radius: 90px;
 }
 
+body {
+  background-size: cover;
+  background-position: center top;
+  color: rgba(250,250,250,1);
+  font-size: 20px;
+}
+
+h1 {
+  color: rgba(10,10,10,.5);
+}
